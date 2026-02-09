@@ -58,6 +58,7 @@ In Postman WebSocket interface:
 ```json
 {
   "sensorId": "TEMP_01",
+  "name": "Temperature",
   "value": 25.34,
   "unit": "°C",
   "limits": {
@@ -143,6 +144,7 @@ In Postman WebSocket interface:
 ```json
 {
   "sensorId": "WCOLOR",
+  "name": "Water Color",
   "value": {
     "r": 183,
     "g": 209,

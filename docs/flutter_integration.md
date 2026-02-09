@@ -48,6 +48,7 @@ class SensorLimits {
 
 class SensorData {
   final String sensorId;
+  final String name;
   final double value;
   final String unit;
   final SensorLimits limits;
@@ -55,6 +56,7 @@ class SensorData {
 
   SensorData({
     required this.sensorId,
+    required this.name,
     required this.value,
     required this.unit,
     required this.limits,
@@ -64,6 +66,7 @@ class SensorData {
   factory SensorData.fromJson(Map<String, dynamic> json) {
     return SensorData(
       sensorId: json['sensorId'],
+      name: json['name'],
       value: json['value'].toDouble(),
       unit: json['unit'],
       limits: SensorLimits.fromJson(json['limits']),
@@ -121,6 +124,7 @@ class RgbLimits {
 
 class RgbSensorData {
   final String sensorId;
+  final String name;
   final RgbValue value;
   final String unit;
   final RgbLimits limits;
@@ -128,6 +132,7 @@ class RgbSensorData {
 
   RgbSensorData({
     required this.sensorId,
+    required this.name,
     required this.value,
     required this.unit,
     required this.limits,
@@ -137,6 +142,7 @@ class RgbSensorData {
   factory RgbSensorData.fromJson(Map<String, dynamic> json) {
     return RgbSensorData(
       sensorId: json['sensorId'],
+      name: json['name'],
       value: RgbValue.fromJson(json['value']),
       unit: json['unit'],
       limits: RgbLimits.fromJson(json['limits']),
