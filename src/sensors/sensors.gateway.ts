@@ -31,13 +31,13 @@ export class SensorsGateway implements OnGatewayConnection, OnGatewayDisconnect 
         // High Priority (Fast): Temperature and pH (Every 2 seconds)
         this.highPriorityInterval = setInterval(() => {
             this.broadcastSensorData(['TEMP_01', 'PH_01']);
-        }, 2000);
+        }, 1000);
 
         // Low Priority (Slow): Salinity, Turbidity, DO (Every 5 seconds)
         // Spec said 5-10 seconds. Choosing 5 seconds.
         this.lowPriorityInterval = setInterval(() => {
             this.broadcastSensorData(['SAL_01', 'TURB_01', 'DO_01', 'WCOLOR']);
-        }, 5000);
+        }, 1500);
     }
 
     private broadcastSensorData(sensorIds: string[]) {

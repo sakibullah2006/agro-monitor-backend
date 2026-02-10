@@ -110,12 +110,19 @@ export class SensorsService {
             const minSafe = sensor.minSafe as number;
             const maxSafe = sensor.maxSafe as number;
 
+            // Bias towards the center of the safe range to keep values mostly safe
+            const safeCenter = (minSafe + maxSafe) / 2;
+            const isUnsafe = currentValue < minSafe || currentValue > maxSafe;
+            // Stronger pull if outside safe range, gentle pull if inside
+            const biasFactor = isUnsafe ? 0.1 : 0.05;
+            const bias = (safeCenter - currentValue) * biasFactor;
+
             // Random Walk: New Value = Previous Value + (Small Random Offset)
             const range = absoluteMax - absoluteMin;
-            const maxStep = range * 0.05; // 5% max step
+            const maxStep = range * 0.02; // Reduced to 2% max step (was 5%) for stability
             const offset = (Math.random() * maxStep * 2) - maxStep;
 
-            let newValue = currentValue + offset;
+            let newValue = currentValue + offset + bias;
 
             // Boundary Check (Clamping)
             if (newValue < absoluteMin) newValue = absoluteMin;
